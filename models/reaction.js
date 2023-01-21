@@ -23,11 +23,6 @@ const reactionSchema = new mongoose.Schema(
       max_length: 280,
     },
   },
-  // {
-  //   toJSON: {
-  //     getters: true,
-  //   },
-  // }
 );
 
 const Reaction = model('reaction', reactionSchema);
