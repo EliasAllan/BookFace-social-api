@@ -29,13 +29,17 @@ const userSchema = new mongoose.Schema(
     thoughts: [thoughtSchema],
     friends: [userSchema],
   },
-  {
-    toJSON: {
-      getters: true,
-    },
-  }
+  // {
+  //   toJSON: {
+  //     getters: true,
+  //   },
+  // }
 );
 
 const User = model("user", userSchema);
+
+userSchema.virtual('friendCount').get(function() {
+  return `${this.friends.length} <${this.friends.length}>`
+})
 
 module.exports = User;
