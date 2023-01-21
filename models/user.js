@@ -1,30 +1,33 @@
-const { Schema, model } = require('mongoose');
-// const assignmentSchema = require('./Assignment');
+const { Schema, model } = require("mongoose");
+const thoughtSchema = require('./Thought');
 
-// Schema to create Student model
-const UserSchema = new Schema(
+// Schema to create a User model
+const userSchema = new mongoose.Schema(
   {
     username: {
       type: String,
+      unique: true,
       required: true,
-      max_length: 50,
+      trim: true,
+      // validate: {
+      //   validator: function (v) {
+      //     // any white space strings will be false or invalid
+      //     if (v.trim().length === 0) {
+      //       return false;
+      //     }
+      //     return /[A-Za-z0-9\- ]+/.test(v);
+      //   },
+      //   message: (props) => `${props.value} is not a valid username!`,
+      // },
     },
     email: {
       type: String,
       required: true,
+      unique: true,
       max_length: 50,
     },
-    thoughts: {
-      type: String,
-      required: true,
-      max_length: 50,
-    },
-    friends: {
-      type: String,
-      required: true,
-      max_length: 50,
-    },
-    // assignments: [assignmentSchema],
+    thoughts: [thoughtSchema],
+    friends: [userSchema],
   },
   {
     toJSON: {
@@ -33,6 +36,6 @@ const UserSchema = new Schema(
   }
 );
 
-const Student = model('student', studentSchema);
+const User = model("user", userSchema);
 
-module.exports = Student;
+module.exports = User;
