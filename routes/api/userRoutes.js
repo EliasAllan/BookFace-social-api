@@ -6,8 +6,8 @@ const {
 } = require('../../controllers/userController');
 // GET '/api/posts/' - all users
 // POST '/api/posts/' - create one user
-router.route('/').get(getPosts).post(createPost);
+router.route('/').get(getUsers).post(createUser);
 
-router.route('/:postId').get(getSinglePost);
+router.route('/:userId').get(getSingleUser);
 
 module.exports = router;
