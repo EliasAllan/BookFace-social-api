@@ -25,6 +25,7 @@ const userSchema = new mongoose.Schema(
       required: true,
       unique: true,
       max_length: 50,
+      match: /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/,
     },
     thoughts: [thoughtSchema],
     friends: [userSchema],
@@ -32,6 +33,8 @@ const userSchema = new mongoose.Schema(
   {
     toJSON: {
       virtuals: true,
+      getters: true,
+      getters: true,
     },
   }
 );
