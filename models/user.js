@@ -2,7 +2,7 @@ const { Schema, model } = require("mongoose");
 const thoughtSchema = require('./Thought');
 
 // Schema to create a User model
-const userSchema = new mongoose.Schema(
+const userSchema = new Schema(
   {
     username: {
       type: String,
@@ -27,8 +27,16 @@ const userSchema = new mongoose.Schema(
       max_length: 50,
       match: /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/,
     },
-    thoughts: [thoughtSchema],
-    friends: [userSchema],
+    thoughts: [ {
+      type: Schema.Types.ObjectId,
+      ref: 'thought'
+    },],
+    friends: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'user'
+      },
+    ],
   },
   {
     toJSON: {

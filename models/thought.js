@@ -1,8 +1,8 @@
 const { Schema, model } = require('mongoose');
-const reactionSchema = require('./reaction');
+const reactionSchema = require('./Reaction');
 
 // Schema to create Throught model
-const thoughtSchema = new mongoose.Schema(
+const thoughtSchema = new Schema(
   {
     thoughtText: {
       type: String,
@@ -15,6 +15,7 @@ const thoughtSchema = new mongoose.Schema(
       required: true,
       min_length: 1,
       max_length: 280,
+      default: Date.now()
     },
     username: {
       type: String,

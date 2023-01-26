@@ -1,7 +1,7 @@
 const { Schema, model } = require('mongoose');
 
 // Schema to create Reaction model
-const reactionSchema = new mongoose.Schema(
+const reactionSchema = new Schema(
   {
     reactionId: {
       type: Schema.Types.ObjectId,
@@ -25,6 +25,4 @@ const reactionSchema = new mongoose.Schema(
   },
 );
 
-const Reaction = model('reaction', reactionSchema);
-
-module.exports = Reaction;
+module.exports = reactionSchema;
