@@ -21,8 +21,15 @@ const reactionSchema = new Schema(
       required: true,
       min_length: 1,
       max_length: 280,
+      default: Date.now()
     },
   },
+  {
+    toJSON: {
+      getters: true,
+    },
+    id: false,
+  }
 );
 
 module.exports = reactionSchema;
