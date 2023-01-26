@@ -7,9 +7,9 @@ module.exports = {
       .then((posts) => res.json(posts))
       .catch((err) => res.status(500).json(err));
   },
-    // Get single user
+  // Get single user
   getSingleUser(req, res) {
-    User.findOne({ _id: req.params.postId })
+    User.findOne({ _id: req.params.userId })
       .then((post) =>
         !post
           ? res.status(404).json({ message: "No user with that ID" })
@@ -23,7 +23,7 @@ module.exports = {
       .then((dbUserData) => res.json(dbUserData))
       .catch((err) => res.status(500).json(err));
   },
-// Update a user
+  // Update a user
   updateUser(req, res) {
     User.findOneAndUpdate(
       { _id: req.params.userId },
@@ -37,21 +37,22 @@ module.exports = {
       )
       .catch((err) => res.status(500).json(err));
   },
-    // Delete a user
-    deleteUser(req, res) {
-      User.findOneAndDelete({ _id: req.params.userId })
-        .then((user) =>
-          !user
-            ? res.status(404).json({ message: 'No user with that ID' })
-            : Thought.deleteMany({ _id: { $in: user.thoughts } })
-        )
-        .then(() => res.json({ message: 'User and associated thoughts deleted!' }))
-        .catch((err) => res.status(500).json(err));
-    },
-      // Create a new user
-  // Add an assignment to a student
+  // Delete a user
+  deleteUser(req, res) {
+    User.findOneAndDelete({ _id: req.params.userId })
+      .then((user) =>
+        !user
+          ? res.status(404).json({ message: "No user with that ID" })
+          : Thought.deleteMany({ _id: { $in: user.thoughts } })
+      )
+      .then(() =>
+        res.json({ message: "User and associated thoughts deleted!" })
+      )
+      .catch((err) => res.status(500).json(err));
+  },
+  // Add a friend
   addFriend(req, res) {
-    console.log('You are adding a friend');
+    console.log("You are adding a friend");
     console.log(req.body);
     User.findOneAndUpdate(
       { _id: req.params.userId },
@@ -62,7 +63,7 @@ module.exports = {
         !user
           ? res
               .status(404)
-              .json({ message: 'No student found with that ID :(' })
+              .json({ message: "No student found with that ID :(" })
           : res.json(user)
       )
       .catch((err) => res.status(500).json(err));
@@ -75,9 +76,7 @@ module.exports = {
     )
       .then((user) =>
         !user
-          ? res
-              .status(404)
-              .json({ message: 'No user found with that ID :(' })
+          ? res.status(404).json({ message: "No user found with that ID :(" })
           : res.json(user)
       )
       .catch((err) => res.status(500).json(err));

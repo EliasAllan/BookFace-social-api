@@ -48,8 +48,12 @@ module.exports = {
   // Delete a thought
   deleteThought(req, res) {
     Thought.findOneAndDelete({ _id: req.params.thoughtId })
-      .then(() => res.json({ message: "Thoughts deleted!" }))
-      .catch((err) => res.status(500).json(err));
+    .then((thought) =>
+        !thought
+          ? res.status(404).json({ message: "No thought with this id!" })
+          : res.json(thought)
+      )
+      .catch((err) => res.status(500).json(err))
   },
   // Create reaction
   createReaction(req, res) {
